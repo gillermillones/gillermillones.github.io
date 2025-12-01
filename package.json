@@ -1,11 +1,31 @@
 {
-  "name": "gillermillones.github.io",
-  "version": "1.0.0",
-  "description": "Progressive Web App para la asignatura PAD, que haga uso de la API GoogleBooks",
-  "main": "sw.js",
+  "name": "googlebooksclient",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
   },
+  "dependencies": {
+    "next": "16.0.6",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.6",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "workbox-cli": "^7.4.0"
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gillermillones/gillermillones.github.io.git"
@@ -17,8 +37,5 @@
   "bugs": {
     "url": "https://github.com/gillermillones/gillermillones.github.io/issues"
   },
-  "homepage": "https://github.com/gillermillones/gillermillones.github.io#readme",
-  "devDependencies": {
-    "workbox-cli": "^7.4.0"
-  }
+  "homepage": "https://github.com/gillermillones/gillermillones.github.io#readme"
 }
