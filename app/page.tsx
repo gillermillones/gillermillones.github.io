@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Formulario from './components/Formulario'
 
-export default function Home() {
+const Formulario = require('./components/Formulario'); 
+
+function Home() {
   
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -12,3 +12,4 @@ export default function Home() {
     </div>
   );
 }
+module.exports Home;

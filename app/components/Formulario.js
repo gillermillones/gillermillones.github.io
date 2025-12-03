@@ -1,12 +1,21 @@
 "use client";
 
-import axios from 'axios';
-import { useState } from "react";
-import Lista from './Lista'
+//import axios from 'axios';
+const axios = require('axios');
+const React = require('react');
+//import { useState } from "react";
+const { useState } = React;
+//import Lista from './Lista'
+const Lista = require('./Lista.js');
 
 function Formulario(props) {
     const [libro, setLibro] = useState("");
     const [result, setResult] = useState([]);
+
+    const clave = localStorage.getItem("librosPasados");
+    if(clave != null){
+      setResult(result);
+    }
 
     function handleChange(event) {
         setLibro(event.target.value);
@@ -16,6 +25,7 @@ function Formulario(props) {
         event.preventDefault();
         axios.get("https://www.googleapis.com/books/v1/volumes?q=" + libro + "+intitle:").then((res) => {
             setResult(res.data.items);
+            localStorage.setItem("librosPasados", result);
         });
     }
 
@@ -31,4 +41,4 @@ function Formulario(props) {
     </div>
   );
 }
-export default Formulario;
+module.exports Formulario;

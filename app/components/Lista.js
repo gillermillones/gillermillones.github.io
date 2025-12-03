@@ -1,5 +1,3 @@
-import React from "react";
-
 function Lista({props}) {
     console.log(props);
     return (
@@ -17,4 +15,4 @@ function Lista({props}) {
         </ul>
     );
 }
-export default Lista;
+module.exports Lista;
