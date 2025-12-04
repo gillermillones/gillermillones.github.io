@@ -15,4 +15,5 @@ function Lista({props}) {
         </ul>
     );
 }
-module.exports Lista;
+export default Lista;
+//module.exports = Lista;

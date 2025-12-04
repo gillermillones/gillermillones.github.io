@@ -1,21 +1,23 @@
-"use client";
+'use client';
 
-//import axios from 'axios';
-const axios = require('axios');
-const React = require('react');
-//import { useState } from "react";
-const { useState } = React;
-//import Lista from './Lista'
-const Lista = require('./Lista.js');
+import axios from 'axios';
+//const axios = require('axios');
+//const React = require('react');
+import { useEffect, useState } from "react";
+//const { useState } = React;
+import Lista from './Lista';
+//const Lista = require('./Lista.js');
 
 function Formulario(props) {
     const [libro, setLibro] = useState("");
     const [result, setResult] = useState([]);
 
-    const clave = localStorage.getItem("librosPasados");
-    if(clave != null){
-      setResult(result);
-    }
+    useEffect(() =>{
+      const clave = localStorage.getItem("librosPasados");
+      if(clave != null && clave != "" && clave != "undefined"){
+        setResult(JSON.parse(clave));
+      }
+    });
 
     function handleChange(event) {
         setLibro(event.target.value);
@@ -24,21 +26,45 @@ function Formulario(props) {
     function handleBuscar(event){
         event.preventDefault();
         axios.get("https://www.googleapis.com/books/v1/volumes?q=" + libro + "+intitle:").then((res) => {
-            setResult(res.data.items);
-            localStorage.setItem("librosPasados", result);
+          setResult(res.data.items);
+          if(!res || !res.data || res.data.totalItems == 0){
+            setResult([]);
+            localStorage.setItem("librosPasados", "");
+          }
+          else if(result.length != 0){
+            localStorage.setItem("librosPasados", JSON.stringify(res.data.items));
+          }
+        }).catch(function (error) {
+          console.log("Error al buscar libros");
+          setResult([]);
         });
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(registration => {
+          console.log('Service Worker registrado con éxito:', registration);
+        })
+        .catch(error => {
+          console.error('Error registrando el Service Worker:', error);
+        });
+      });
     }
 
   return (
     <div>
-        <form onSubmit={handleBuscar}>
-          <label>Titulo del libro
-            <input type="text" name="titulo" id="name" placeholder="P.Ej: El Principito" onChange={handleChange}></input>
-          </label>
-          <button type="submit">Buscar libro</button>
-        </form>
-        <Lista props = {result}/>
+      <form onSubmit={handleBuscar}>
+        <label>Titulo del libro
+          <input type="text" name="titulo" id="name" placeholder="P.Ej: El Principito" onChange={handleChange}></input>
+        </label>
+        <button type="submit">Buscar libro</button>
+      </form>
+      <Lista props = {result}/>
+      {result.length == 0 && 
+        <h1 id="err">No se encontraron resultados</h1>
+      }
     </div>
   );
 }
-module.exports Formulario;
+export default Formulario;
+//module.exports = Formulario;
