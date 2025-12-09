@@ -24,3 +24,53 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.mainTitle{
+  font-size: xx-large;
+  padding-bottom: 10px;
+}
+
+.searchBox{
+  padding: 5px;
+  margin: 5px;
+  outline: auto #0a0a0a;
+  outline-width: 3px;
+}
+
+.searchButton{
+  padding: 5px;
+  margin: 5px;
+  outline: auto #0a0a0a;
+  outline-width: 5px;
+}
+
+li.elem{
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  margin: 5px;
+}
+
+li.elem a{
+  height: 100px;
+  width: 70px;
+}
+
+li.elem div.innerElem{
+  display: flex;
+  flex-direction: column;
+}
+
+li.elem div.innerElem h1{
+  font-size: large;
+}
+
+li.elem div.innerElem h2{
+  font-size: small;
+}
+
+li.elem div.innerElem p.smallText{
+  font-size: x-small;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+}

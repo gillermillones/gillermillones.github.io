@@ -25,7 +25,7 @@ function Formulario(props) {
 
     function handleBuscar(event){
         event.preventDefault();
-        axios.get("https://www.googleapis.com/books/v1/volumes?q=" + libro + "+intitle:").then((res) => {
+        axios.get("https://www.googleapis.com/books/v1/volumes?q=" + libro).then((res) => {
           setResult(res.data.items);
           if(!res || !res.data || res.data.totalItems == 0){
             setResult([]);
@@ -33,6 +33,7 @@ function Formulario(props) {
           }
           else if(result.length != 0){
             localStorage.setItem("librosPasados", JSON.stringify(res.data.items));
+            console.log(res.data.items);
           }
         }).catch(function (error) {
           console.log("Error al buscar libros");
@@ -54,10 +55,10 @@ function Formulario(props) {
   return (
     <div>
       <form onSubmit={handleBuscar}>
-        <label>Titulo del libro
-          <input type="text" name="titulo" id="name" placeholder="P.Ej: El Principito" onChange={handleChange}></input>
+        <label>Titulo del libro:
+          <input type="text" class="searchBox" name="name" id="name" placeholder="P.Ej: El Principito" onChange={handleChange}></input>
         </label>
-        <button type="submit">Buscar libro</button>
+        <button type="submit" class="searchButton">Buscar libro</button>
       </form>
       <Lista props = {result}/>
       {result.length == 0 && 
