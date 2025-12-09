@@ -1,3 +1,5 @@
+"use client";
+
 //const Formulario = require('./components/Formulario'); 
 import Formulario from "./components/Formulario";
 

@@ -1,4 +1,4 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.6.2/workbox-sw.js');
+importScripts('/workbox-sw.js');
 
 self.addEventListener('install', event => self.skipWaiting());
 self.addEventListener('activate', event => clients.claim());
@@ -21,7 +21,8 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  /^\/$/,
+  ///^\/$/,
+  ({ request }) => request.mode === 'navigate',
   new workbox.strategies.NetworkFirst({
     cacheName: 'html-cache',
   }),

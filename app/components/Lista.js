@@ -1,3 +1,5 @@
+"use client";
+
 function Lista({props}) {
     return (
         <ul>

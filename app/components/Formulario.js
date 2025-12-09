@@ -11,13 +11,14 @@ import Lista from './Lista';
 function Formulario(props) {
     const [libro, setLibro] = useState("");
     const [result, setResult] = useState([]);
+    let str = "";
 
     useEffect(() =>{
       const clave = localStorage.getItem("librosPasados");
-      if(clave != null && clave != "" && clave != "undefined"){
+      if(clave != null && clave != "" && clave != "undefined" && result.length == 0){
         setResult(JSON.parse(clave));
       }
-    });
+    }, []);
 
     function handleChange(event) {
         setLibro(event.target.value);
@@ -25,14 +26,22 @@ function Formulario(props) {
 
     function handleBuscar(event){
         event.preventDefault();
-        axios.get("https://www.googleapis.com/books/v1/volumes?q=" + libro).then((res) => {
+        axios.get("https://www.googleapis.com/books/v1/volumes?q=intitle:" + libro).then((res) => {
+          str = "";
           setResult(res.data.items);
           if(!res || !res.data || res.data.totalItems == 0){
             setResult([]);
-            localStorage.setItem("librosPasados", "");
+            //localStorage.setItem("librosPasados", "");
           }
           else if(result.length != 0){
-            localStorage.setItem("librosPasados", JSON.stringify(res.data.items));
+            str += "[";
+            str += JSON.stringify(res.data.items[0]);
+            for(let x = 1; x < res.data.totalItems && x < 5; x++) {
+              str += ",";
+              str += JSON.stringify(res.data.items[x]);
+            }
+             str += "]";
+            localStorage.setItem("librosPasados", str);
             console.log(res.data.items);
           }
         }).catch(function (error) {
@@ -56,7 +65,7 @@ function Formulario(props) {
     <div>
       <form onSubmit={handleBuscar}>
         <label>Titulo del libro:
-          <input type="text" class="searchBox" name="name" id="name" placeholder="P.Ej: El Principito" onChange={handleChange}></input>
+          <input type="text" class="searchBox" id="name" placeholder="P.Ej: El Principito" onChange={handleChange}></input>
         </label>
         <button type="submit" class="searchButton">Buscar libro</button>
       </form>
