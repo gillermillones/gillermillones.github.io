@@ -11,6 +11,9 @@ function Lista({props}) {
                     <img src={libro.volumeInfo.imageLinks.smallThumbnail}></img>
                   }
                   </a>
+                  {"listPrice" in libro.saleInfo &&
+                    <p class="smallText">{libro.saleInfo.listPrice.amount}</p>
+                  }
                 </div>
                 
                 <div class="innerElem">
