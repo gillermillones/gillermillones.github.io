@@ -67,6 +67,8 @@ li.elem div.innerElem{
 
 li.elem div.innerElem h1{
   font-size: large;
+  text-overflow: ellipsis;
+  overflow: hidden; 
 }
 
 li.elem div.innerElem h2{
