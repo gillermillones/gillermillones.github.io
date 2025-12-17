@@ -47,7 +47,7 @@ body {
 li.elem{
   display: flex;
   flex-direction: row;
-  height: 150px;
+  height: 151px;
   margin: 25px;
   outline: 2px white;
   outline-style: auto;
