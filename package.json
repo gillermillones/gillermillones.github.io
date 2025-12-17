@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && npm run build-sw",
     "deploy": "gh-pages -d out",
     "dev": "next dev",
     "build": "next build",

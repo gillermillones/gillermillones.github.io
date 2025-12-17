@@ -1,8 +1,7 @@
 module.exports = {
-	globDirectory: '.',
+	globDirectory: 'out',
 	globPatterns: [
-		'public/**/*.{svg,json,js,ico}',
-    	'.next/static/**/*.{js,css,map}'
+		'**/*.{html,js,css,json,svg,ico,png}'
 	],
 	globIgnores: [
     	'public/sw.js',       
@@ -10,6 +9,6 @@ module.exports = {
     	'workbox-config.cjs',
 		'public/workbox*.js'
   	],
-	swDest: 'public/sw.js',
+	swDest: 'out/sw.js',
 	swSrc: 'app/sw.js'
 };
